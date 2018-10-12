@@ -1,9 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title>Insert title here</title>
+<title>SCEWebAPP</title>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="style/styleCss.css" />
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-<h3> Teste apresentacao da interface</h3>
+	<h1>Lista de Livros</h1>
+	<h3>
+		<a href="/cadastrarLivro" class="waves-effect waves-light btn"><i
+			class="material-icons left"> add_circle_outline</i>Cadastrar Livro </a>
+	</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>ISBN</th>
+				<th>Titulo</th>
+				<th>Autor</th>
+			</tr>
+		</thead>
+		<tbody>
+
+
+			<tr th:each="livro : ${livros}">
+					<td><span th:text="${livro.isbn}"></span></td>
+					<td><span th:text="${livro.titulo}"></span></td>
+					<td><span th:text="${livro.autor}"></span></td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<!--JavaScript at end of body for optimized loading-->
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>
 </html>

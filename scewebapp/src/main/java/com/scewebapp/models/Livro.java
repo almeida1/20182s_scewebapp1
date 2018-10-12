@@ -2,11 +2,13 @@ package com.scewebapp.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Livro implements Serializable {
@@ -15,7 +17,9 @@ public class Livro implements Serializable {
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private Long id;
+	@NotEmpty(message = "ISBN não pode ser vazio")
 	private String isbn;
+	@NotEmpty(message = "Titulo não pode ser vazio")
 	private String titulo;
 	private String autor;
 
@@ -24,9 +28,6 @@ public class Livro implements Serializable {
 	}
 
 	public void setIsbn(String isbn) {
-		if (isbn == "" | isbn == null) {
-			throw new RuntimeException("ISBN invalido");
-		}
 		this.isbn = isbn;
 	}
 

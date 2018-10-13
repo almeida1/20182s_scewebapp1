@@ -28,7 +28,7 @@ public class LivroController {
 			return "redirect:/cadastrarLivro";
 		}
 		er.save(livro);
-		attributes.addFlashAttribute("mensagem", "Evento cadastrado com sucesso!");
+		attributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
 		return "redirect:/cadastrarLivro";
 	}
 	@RequestMapping("/livros")

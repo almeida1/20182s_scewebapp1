@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.scewebapp.models.Livro;
 import com.scewebapp.repository.LivroRepository;
 
-@Controller
+@Controller //identifica esta classe como controller
 public class LivroController {
 	@Autowired
 	private LivroRepository er;

@@ -31,7 +31,7 @@ public class LivroController {
 		attributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
 		return "redirect:/cadastrarLivro";
 	}
-	@RequestMapping("/livros")
+	@RequestMapping(value="/livros")
 	public ModelAndView listaLivros() {
 		ModelAndView mv = new ModelAndView("index");
 		Iterable<Livro> livros = er.findAll();

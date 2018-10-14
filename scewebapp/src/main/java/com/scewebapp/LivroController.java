@@ -1,4 +1,4 @@
-package com.scewebapp.controllers;
+package com.scewebapp;
 
 import javax.validation.Valid;
 

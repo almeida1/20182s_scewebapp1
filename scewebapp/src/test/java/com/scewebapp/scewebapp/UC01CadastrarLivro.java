@@ -2,49 +2,64 @@ package com.scewebapp.scewebapp;
 
 import static org.junit.Assert.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
+
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runner.RunWith;
 
-import com.scewebapp.models.Livro;
-import com.scewebapp.repository.LivroRepository;
+import java.util.concurrent.TimeUnit;
 
+import org.junit.Before;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class UC01CadastrarLivro {
-	
-	//** The factory that produces entity manager. */
-	private static EntityManagerFactory mEmf;
-	//** The entity manager that persists and queries the DB. */
-	private static EntityManager mEntityManager;
-	@Autowired
-	private static LivroRepository er;
-	private static Livro livro;
-	@BeforeClass
-	public static void initTestFixture() throws Exception {
-		livro = new Livro();
-	    // Get the entity manager for the tests.
-//	    mEmf = Persistence.createEntityManagerFactory(null);
-//	    mEntityManager = mEmf.createEntityManager();
-	 
-	}
-	@Test
-	public void teste() {
-		er.save(livro);
+
+	private static WebDriver driver;
+
+	// Método que inicia tudo que for necessário para o teste
+	// Cria uma instância do navegador e abre a página inicial da DevMedia.
+	@Before
+	public void setUpTest() {
+		System.setProperty("webdriver.chrome.driver", "E:/chromedriver.exe");
+
+		driver = new ChromeDriver();
+
 	}
 
-	 /**
-	 * Cleans up the session.
-	 */
+	// Testa título
+	@Test
+	public void testaTituloDaPagina() {
+
+		//driver.get("https://scewebapp.herokuapp.com/cadastrarLivro");
+		driver.get("localhost:8080");
+		assertEquals("SCEWebApp", driver.getTitle());
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+
+	// Testa título
+	@Test
+	public void quandoEntraComDadosValidosRetornaMensagemOK() {
+		driver.get("https://scewebapp.herokuapp.com/cadastrarLivro");
+		WebElement elemento = driver.findElement(By.ByName.name("isbn"));
+		elemento.sendKeys("1111");
+		elemento = driver.findElement(By.ByName.name("titulo"));
+		elemento.sendKeys("Engenharia de Software");
+		elemento = driver.findElement(By.ByName.name("autor"));
+		elemento.sendKeys("Pressam");
+
+	}
+
+	// Método que finaliza o teste, fechando a instância do WebDriver.
 	@AfterClass
-	public static void closeTestFixture() {
-	   
-//	    mEmf.close();
+	public static void tearDownTest() {
+		driver.quit();
 	}
 
 }
